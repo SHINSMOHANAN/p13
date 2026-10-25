@@ -1,4 +1,4 @@
-name: Autograding - Practical 12
+name: Autograding - Practical 13
 
 on:
   push:
@@ -11,19 +11,16 @@ permissions:
 
 jobs:
   autograding:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Student Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: npm
+          node-version: 20
 
       - name: Install Dependencies
         run: npm install

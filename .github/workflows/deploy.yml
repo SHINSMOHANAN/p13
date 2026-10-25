@@ -12,21 +12,17 @@ permissions:
   id-token: write
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: npm
+          node-version: 20
 
       - name: Install Dependencies
         run: npm install
@@ -43,9 +39,7 @@ jobs:
           path: ./build
 
   deploy:
-
     needs: build
-
     runs-on: ubuntu-latest
 
     environment:
@@ -57,7 +51,6 @@ jobs:
       id-token: write
 
     steps:
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

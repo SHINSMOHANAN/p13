@@ -1,79 +1,87 @@
 import React, { useState } from "react";
 
 function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState(false);
 
-    // TODO 1:
-    // Create state variables for:
-    // name, email, feedback and error message
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    const newErrors = {};
 
-    // TODO 2:
-    // Create a function to handle form submission
+    if (name.trim() === "") {
+      newErrors.name = "Please enter your name";
+    }
 
+    if (email.trim() === "") {
+      newErrors.email = "Please enter your email";
+    } else if (!email.includes("@")) {
+      newErrors.email = "Please enter a valid email";
+    }
 
-    // TODO 3:
-    // Validate the following:
-    // 1. Name should not be empty
-    // 2. Email should not be empty
-    // 3. Feedback should not be empty
-    // 4. Email should contain @
+    if (feedback.trim() === "") {
+      newErrors.feedback = "Please enter your feedback";
+    }
 
+    setErrors(newErrors);
+    setSuccess(Object.keys(newErrors).length === 0);
+  };
 
-    // TODO 4:
-    // Display the feedback form
+  return (
+    <div style={{ maxWidth: "600px", margin: "50px auto", fontFamily: "Arial, sans-serif", padding: "30px" }}>
+      <h1>Student Feedback Form</h1>
 
-
-    return (
-        <div className="container">
-
-            <h1>Student Feedback Form</h1>
-
-            <form>
-
-                <div>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Enter your name"
-                    />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                    />
-                </div>
-
-                <br />
-
-                <div>
-                    <label>Feedback:</label>
-                    <br />
-                    <textarea
-                        id="feedback"
-                        rows="5"
-                        placeholder="Enter your feedback"
-                    ></textarea>
-                </div>
-
-                <br />
-
-                {/* Display validation error here */}
-
-                <button type="submit">
-                    Submit Feedback
-                </button>
-
-            </form>
-
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "20px" }}>
+          <label htmlFor="name">Student Name</label>
+          <br />
+          <input
+            id="name"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{ width: "100%", padding: "10px", marginTop: "6px", boxSizing: "border-box" }}
+          />
+          {errors.name && <p>{errors.name}</p>}
         </div>
-    );
+
+        <div style={{ marginBottom: "20px" }}>
+          <label htmlFor="email">Email</label>
+          <br />
+          <input
+            id="email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ width: "100%", padding: "10px", marginTop: "6px", boxSizing: "border-box" }}
+          />
+          {errors.email && <p>{errors.email}</p>}
+        </div>
+
+        <div style={{ marginBottom: "20px" }}>
+          <label htmlFor="feedback">Feedback</label>
+          <br />
+          <textarea
+            id="feedback"
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            rows="5"
+            style={{ width: "100%", padding: "10px", marginTop: "6px", boxSizing: "border-box" }}
+          />
+          {errors.feedback && <p>{errors.feedback}</p>}
+        </div>
+
+        <button type="submit" style={{ padding: "10px 20px", cursor: "pointer" }}>
+          Submit
+        </button>
+      </form>
+
+      {success && <h2>Feedback submitted successfully!</h2>}
+    </div>
+  );
 }
 
 export default App;

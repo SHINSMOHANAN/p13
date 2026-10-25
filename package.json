@@ -2,7 +2,7 @@
   "name": "rjs13",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://shinsmohanan.github.io/rjs13/",
+  "homepage": "https://shinsmohanan.github.io/p13/",
   "dependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
